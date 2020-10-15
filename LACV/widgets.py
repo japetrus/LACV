@@ -326,7 +326,16 @@ class LACVWindow(QMainWindow):
     def openSource(self):
         sourcePath, _ = QFileDialog.getOpenFileName(
             filter="Align files (*.Align);;Image files (*.bmp;*.jpg;*.png;*.tiff)")
+
+        if len(sourcePath) < 1:
+            print("No file selected")
+            return
+
         self.lacv.set_source(sourcePath)
+        if self.lacv.source_image is None:
+            print("There was no source image. ======")
+            return
+
         self.sourceWidget.setImage(self.lacv.source_image())
         
         hist = cv2.calcHist([self.lacv.source_image()], [0], None, [256], [0, 256])

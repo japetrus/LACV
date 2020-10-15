@@ -45,6 +45,10 @@ class LACVController:
     }
 
     def set_source(self, source):
+        if len(source) < 1:
+            print("No source chosen")
+            return
+
         print('source=%s' % source)
 
         # Find complement
